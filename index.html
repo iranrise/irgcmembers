@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cyber Activity Report Wall</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🛰️</div>
+      <div>
+        <div class="title">Cyber Activity Report Wall</div>
+        <div class="subtitle">Community-submitted reports with links & evidence (moderated)</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="searchInput" class="search" placeholder="Search platform, tags, type, keywords…" />
+      <select id="platformFilter" class="select">
+        <option value="">All platforms</option>
+        <option>X</option>
+        <option>Facebook</option>
+        <option>Instagram</option>
+        <option>Telegram</option>
+        <option>YouTube</option>
+        <option>Other</option>
+      </select>
+      <button id="refreshBtn" class="btn">Refresh</button>
+      <button id="openFormBtn" class="btn primary">Submit report</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="wall">
+      <div class="wallHeader">
+        <div class="hint">
+          Items scroll continuously. Reports with higher confirmation score appear bolder.
+        </div>
+        <div id="statusText" class="statusText">Loading…</div>
+      </div>
+
+      <div id="columns" class="columns">
+        <div class="col" data-col="0"></div>
+        <div class="col" data-col="1"></div>
+        <div class="col" data-col="2"></div>
+        <div class="col" data-col="3"></div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="panelCard">
+        <h2>How it works</h2>
+        <ul>
+          <li>Submit a report with a link + description.</li>
+          <li>Moderators approve before it shows publicly.</li>
+          <li>Community can confirm/dispute each report (1 vote per device).</li>
+        </ul>
+        <div class="small">
+          Tip: include screenshots/archived links later (we can add uploads next).
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modalBackdrop" id="modalBackdrop"></div>
+    <div class="modalCard" role="dialog" aria-modal="true">
+      <div class="modalHead">
+        <h2>Submit a report</h2>
+        <button id="closeModalBtn" class="iconBtn" aria-label="Close">✕</button>
+      </div>
+
+      <form id="reportForm" class="form">
+        <label>
+          Platform
+          <select id="platform" required>
+            <option value="">Select…</option>
+            <option>X</option>
+            <option>Facebook</option>
+            <option>Instagram</option>
+            <option>Telegram</option>
+            <option>YouTube</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Link (post/account)
+          <input id="url" type="url" placeholder="https://…" required />
+        </label>
+
+        <label>
+          Type
+          <select id="reportType" required>
+            <option value="">Select…</option>
+            <option value="Mockery/Harassment">Mockery/Harassment</option>
+            <option value="Disinformation">Disinformation</option>
+            <option value="Coordinated Replies">Coordinated Replies</option>
+            <option value="Threat/Intimidation">Threat/Intimidation</option>
+            <option value="Impersonation">Impersonation</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <label>
+          Description
+          <textarea id="description" rows="4" placeholder="What happened? What should someone look for?" required></textarea>
+        </label>
+
+        <div class="row2">
+          <label>
+            Severity (1–5)
+            <input id="severity" type="number" min="1" max="5" value="3" required />
+          </label>
+
+          <label>
+            Tags (comma separated)
+            <input id="tags" type="text" placeholder="e.g. propaganda, mockery, botnet" />
+          </label>
+        </div>
+
+        <div class="formActions">
+          <button type="button" id="cancelBtn" class="btn">Cancel</button>
+          <button type="submit" class="btn primary">Submit</button>
+        </div>
+
+        <div id="formMsg" class="formMsg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Supabase JS -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
