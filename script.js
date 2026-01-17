@@ -5,8 +5,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
  * 1) Put your Supabase values here:
  * Supabase Dashboard -> Settings -> API
  */
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_PUBLIC_KEY";
+const SUPABASE_URL = "https://aqgzuuckcrbbiyxapmat.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxZ3p1dWNrY3JiYml5eGFwbWF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NTc0MzIsImV4cCI6MjA4NDIzMzQzMn0.gu0Hyha4lkYDNASkXGQJTqBivpeiMbkxWixsjEEaIJo";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
