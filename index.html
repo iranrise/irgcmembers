@@ -3,33 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Directory Wall</title>
+  <title>Public Directory Wall</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <div class="logo">📌</div>
+      <div class="logo">🧾</div>
       <div>
-        <div class="title">Directory Wall</div>
-        <div class="subtitle">Auth-only directory (consent-based)</div>
+        <div class="title">Public Directory Wall</div>
+        <div class="subtitle">Community submissions (moderated) + True/NotTrue voting</div>
       </div>
     </div>
 
     <div class="controls">
       <input id="searchInput" class="search" placeholder="Search name, title, from…" />
       <button id="refreshBtn" class="btn">Refresh</button>
-      <button id="openFormBtn" class="btn primary">Add entry</button>
-      <button id="authBtn" class="btn">Sign in</button>
-      <button id="signOutBtn" class="btn hidden">Sign out</button>
+      <button id="openFormBtn" class="btn primary">Submit</button>
     </div>
   </header>
 
   <main class="layout">
     <section class="wall">
       <div class="wallHeader">
-        <div class="hint">Items scroll continuously. Higher score appears bolder.</div>
-        <div id="statusText" class="statusText">Not signed in.</div>
+        <div class="hint">Higher True score shows bolder. Pending items won’t appear until approved.</div>
+        <div id="statusText" class="statusText">Loading…</div>
       </div>
 
       <div id="columns" class="columns">
@@ -42,89 +40,71 @@
 
     <aside class="panel">
       <div class="panelCard">
-        <h2>Notes</h2>
+        <h2>Guidelines</h2>
         <ul>
-          <li>This directory is for consenting entries.</li>
-          <li>Sign in required to view/add/vote.</li>
-          <li>Images are stored in Supabase Storage.</li>
+          <li>Submit account/page/handle info — not private personal identity details.</li>
+          <li>Include links and (optional) screenshots as evidence.</li>
+          <li>Vote True / NotTrue once per device — you can change it anytime.</li>
         </ul>
       </div>
     </aside>
   </main>
 
-  <!-- Add Entry Modal -->
+  <!-- Modal -->
   <div id="modal" class="modal hidden" aria-hidden="true">
     <div class="modalBackdrop" id="modalBackdrop"></div>
     <div class="modalCard" role="dialog" aria-modal="true">
       <div class="modalHead">
-        <h2>Add directory entry</h2>
+        <h2>Submit</h2>
         <button id="closeModalBtn" class="iconBtn" aria-label="Close">✕</button>
       </div>
 
       <form id="entryForm" class="form">
         <label>
-          Full name (consent-based)
-          <input id="fullName" type="text" required placeholder="Full Name" />
+          Name (account / page / handle)
+          <input id="displayName" type="text" required placeholder="@handle or Page Name" />
         </label>
 
         <label>
           Title
           <select id="title" required>
             <option value="">Select…</option>
-            <option>Member</option>
-            <option>Volunteer</option>
-            <option>Coordinator</option>
-            <option>Leader</option>
-            <option>Other</option>
+            <option value="Mockery/Harassment">Mockery/Harassment</option>
+            <option value="Disinformation">Disinformation</option>
+            <option value="Coordinated Replies">Coordinated Replies</option>
+            <option value="Threat/Intimidation">Threat/Intimidation</option>
+            <option value="Impersonation">Impersonation</option>
+            <option value="Other">Other</option>
           </select>
         </label>
 
         <label>
           From (optional)
-          <input id="fromLabel" type="text" placeholder="City / Department / Group" />
+          <input id="fromLabel" type="text" placeholder="Where you saw it / context" />
         </label>
 
         <label>
-          Social media / website (optional)
+          Social media link (optional)
           <input id="socialUrl" type="url" placeholder="https://…" />
         </label>
 
         <label>
-          Upload image (optional)
+          Upload image (optional screenshot evidence)
           <input id="imageFile" type="file" accept="image/*" />
         </label>
 
         <label>
           Description (optional, max 280)
-          <textarea id="description" rows="4" maxlength="280" placeholder="Short description…"></textarea>
+          <textarea id="description" rows="4" maxlength="280" placeholder="Short note…"></textarea>
         </label>
 
         <div class="formActions">
           <button type="button" id="cancelBtn" class="btn">Cancel</button>
-          <button type="submit" class="btn primary">Save</button>
+          <button type="submit" class="btn primary">Submit</button>
         </div>
 
         <div id="formMsg" class="formMsg"></div>
       </form>
-    </div>
-  </div>
-
-  <!-- Auth Modal -->
-  <div id="authModal" class="modal hidden" aria-hidden="true">
-    <div class="modalBackdrop" id="authBackdrop"></div>
-    <div class="modalCard" role="dialog" aria-modal="true">
-      <div class="modalHead">
-        <h2>Sign in</h2>
-        <button id="closeAuthBtn" class="iconBtn" aria-label="Close">✕</button>
-      </div>
-      <div class="form">
-        <label>
-          Email
-          <input id="email" type="email" placeholder="you@example.com" />
-        </label>
-        <button id="magicLinkBtn" class="btn primary">Send magic link</button>
-        <div id="authMsg" class="formMsg"></div>
-      </div>
     </div>
   </div>
 
